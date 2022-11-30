@@ -1,0 +1,60 @@
+             Node* mid(Node*head)
+            {
+                if(head == NULL);
+                
+                Node*slow = head;
+                Node* fast = head->next;
+                
+                while(fast && fast->next)
+                {
+                    slow = slow->next;
+                    fast = fast->next->next;
+                }
+                
+                return slow;
+            
+            }
+             Node* reverse(Node* head)
+            {
+                if(head == NULL||head->next == NULL) return head;
+                
+                Node* prev = NULL;
+                Node* curr = head;
+                Node* next;
+                while(curr != NULL)
+                {
+                   next = curr->next;
+                   curr->next = prev;
+                   prev = curr;
+                   curr = next;
+                }
+                return prev;
+                
+            }
+
+             void reorderList(Node* head) 
+            {
+                // Your code here
+                ///Node* temp=head;
+                
+                Node * first = head;
+                Node* midest = mid(head);
+                Node* second = midest->next;
+                
+                midest->next = NULL;
+                second = reverse(second);
+                
+                //now merging this
+                 while(first && second != NULL)
+                {
+                    
+                    Node* firstnext = first->next;
+                    Node* secondnext = second->next;
+                    first->next = second;
+                    second->next = firstnext;
+                    first = firstnext;
+                    second = secondnext;
+                 }
+                return;
+        
+        }
