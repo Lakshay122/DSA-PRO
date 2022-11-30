@@ -1,0 +1,41 @@
+ bool dfs ( int i, vector<int> &vis , vector<int> &path , vector<vector<int>> adj,vector<int> &ans)
+    {
+        vis[i] = 1;
+        path[i] = 1;
+        
+        for(int j=0; j<adj[i].size() ; j++)
+        {
+            if( !vis[adj[i][j]] ) 
+            {
+               if( dfs(adj[i][j] , vis , path , adj , ans) == 1) return 1;
+            }
+            
+                 if( path[adj[i][j]] ) return true;
+            
+            
+        }
+        ans.push_back(i);
+        path[i] = 0;
+        
+        return 0;
+    }  
+    
+    vector<int> eventualSafeNodes(vector<vector<int>>& adj) {
+        int V = adj.size();
+        
+        vector<int> vis(V,0) , path(V,0) , ans;
+      
+       
+       for(int i = 0; i<V; i++){
+           
+           if(!vis[i])
+           {
+              dfs(i,vis,path,adj,ans);
+              
+           }
+       }
+      sort(ans.begin(),ans.end());
+         
+        return ans;
+        
+    }
