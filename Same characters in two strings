@@ -1,0 +1,11 @@
+int sameChar(string A, string B)
+    {
+        int i=0, j=0;
+        int cnt=0;
+        while(i<A.size() && j<B.size()){
+            if(tolower(A[i]) == tolower(B[j])) cnt++;
+            i++;j++;
+        }
+        return cnt;
+        // code here 
+    }
