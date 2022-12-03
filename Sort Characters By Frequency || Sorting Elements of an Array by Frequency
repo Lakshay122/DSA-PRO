@@ -1,0 +1,30 @@
+ static bool cmp(pair <int, char> a, pair <int, char> b){
+      return a.first < b.first;
+   }
+    string frequencySort(string s) {
+        map<char,int> m;
+        
+        
+        for(int i=0; i<s.size(); i++){
+            m[s[i]]++;
+        }
+        
+        vector<pair<int,char>> v;
+        
+        for( auto it: m ){
+            v.push_back({it.second,it.first});
+        }
+        sort(v.rbegin(),v.rend(),cmp);
+        
+        string res="";
+        
+        for(int i=0; i<v.size(); i++){
+            
+            int cnt = v[i].first;
+            
+            while(cnt--){
+                res += v[i].second;
+            }
+        }
+        return res;
+    }
