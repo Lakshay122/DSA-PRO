@@ -1,0 +1,37 @@
+vector<vector<int>>nearest(vector<vector<int>>grid)
+	{
+	    // Code here
+	    int row[]={-1,0,1,0};
+	    int col[]={0,1,0,-1};
+	    int n=grid.size();
+	    int m=grid[0].size();
+	    vector<vector<int>>vis(n,vector<int>(m,0));
+	    
+	    queue<pair<pair<int,int>,int>>p;
+	    for(int i=0;i<n;i++){
+	        for(int j=0;j<m;j++){
+	            if(grid[i][j]==1){
+	                p.push({{i,j},0});
+	                vis[i][j]=1;
+	            }
+	        }
+	    }
+	    while(!p.empty()){
+	        int rowIndex=p.front().first.first;
+	        int colIndex=p.front().first.second;
+	        int length=p.front().second;
+	        grid[rowIndex][colIndex]=length;
+	        p.pop();
+	        
+	        for(int i=0;i<4;i++){
+	            int j=rowIndex+row[i];
+	            int k=colIndex+col[i];
+	            
+	            if(j>=0 && j<n && k>=0 && k<m && grid[j][k]==0 && !vis[j][k]){
+	                vis[j][k]=1;
+	                p.push({{j,k},length+1});
+	            }
+	        }
+	    }
+	    return grid;
+	}
