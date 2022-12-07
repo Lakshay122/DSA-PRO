@@ -1,0 +1,33 @@
+vector<int> sum ;
+  void solve(Node* root, int low, int high){
+      if(!root) return ;
+      if( root->data > low && root->data < high ) {
+
+          sum.push_back(root->data);
+
+          solve(root->left,low,high);
+          solve(root->right,low,high);
+        }
+
+        else if( root->data < low){
+            solve(root->right,low,high);
+        }
+        else if( root->data > high){
+            solve(root->left,low,high);
+        }
+        else if( root->data == low ){
+           sum.push_back(root->data);
+            solve(root->right,low,high);
+        }
+        else if( root->data == high ){
+            sum.push_back(root->data);
+            solve(root->left,low,high);
+        }
+  }
+    vector<int> printNearNodes(Node *root, int low, int high) {
+        //code here
+        solve(root,low,high);
+        sort(sum.begin(),sum.end());
+        return sum;
+        
+    }
