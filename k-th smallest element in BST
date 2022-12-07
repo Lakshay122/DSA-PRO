@@ -1,0 +1,18 @@
+int ans,kth;
+    void solve(Node *root) {
+        if(root==NULL || kth<=0) return;
+        solve(root->left);
+        if(kth==1) {
+            ans = root->data;
+        }
+        kth--;
+        solve(root->right);
+    }
+    
+    int KthSmallestElement(Node *root, int K) {
+        // add code here.
+        ans=-1;
+        kth=K;
+        solve(root);
+        return ans;
+    }
