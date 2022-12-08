@@ -1,0 +1,67 @@
+long long isprime(long long n){
+
+        vector<bool> prime(n+1,true);
+
+        long long cnt=0;
+
+        for(int i=2;i*i<=n;i++){
+
+            if(prime[i]){
+
+                for(int j=2*i;j<=n;j+=i){
+
+                    prime[j]=false;
+
+                }
+
+            }
+
+        }
+
+        for(int i=2;i<=n;i++){
+
+            if(prime[i]){
+
+                if(i*i<=n)
+
+                    cnt++;
+
+                else{
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+        return cnt;
+
+    }
+
+    vector<int> threeDivisors(vector<long long> query, int q)
+
+    {
+
+        vector<int>ans;
+
+        int i=0;
+
+        while(i<q){
+
+            long long val = query[i];
+
+            // val = val/2;
+
+            long long cnt = isprime(val);
+
+            ans.push_back(cnt);
+
+            i++;
+
+        }
+
+        return ans;
+
+    }
