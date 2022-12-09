@@ -1,0 +1,41 @@
+long long numOfWays(int N, int M)
+
+{
+
+    const int mod = 1e9+7;
+
+    vector<pair<int, int>> vp = {
+
+        {2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {-1, 2}, {1, -2}, {-1, -2}
+
+    };
+
+    long long ans = 0;
+
+    for(int i=0; i<N; i++){
+
+        for(int j=0; j<M; j++){
+
+            int count = 0;
+
+            for(auto it: vp){
+
+                int x = i+it.first;
+
+                int y = j+it.second;
+
+                if(x>=0 && y>=0 && x<N && y<M) count++;
+
+            }
+
+            ans += (N*M - count - 1);
+
+            ans %= mod;
+
+        }
+
+    }
+
+    return ans;
+
+}
