@@ -1,0 +1,99 @@
+stack<int>s;
+
+    s.push(num[0]);
+
+    for(int i=1;i<num.size();i++)
+
+    {
+
+       
+
+        
+
+        if(num[i]<s.top() && k>0)
+
+        {
+
+            while(!s.empty() && k>0 && s.top()>num[i])
+
+            {
+
+                s.pop();
+
+                k--;
+
+                // cout<<k<<endl;
+
+            }
+
+        }
+
+            s.push(num[i]);
+
+    }
+
+    while(k>0)
+
+    {
+
+        s.pop();
+
+        k--;
+
+    }
+
+    string str="";
+
+    while(!s.empty())
+
+    {
+
+        str+=s.top();
+
+        s.pop();
+
+    }
+
+    reverse(str.begin(),str.end());
+
+    string ans="";
+
+    int f=0;
+
+    for(int i=0;i<str.length();i++)
+
+    {
+
+        if(str[i]=='0' && f==0)
+
+        {
+
+            continue;
+
+        }
+
+       else if(str[i]!='0'  || f==1)
+
+        {
+
+            ans+=str[i];
+
+            f=1;
+
+           
+
+        }
+
+          
+
+    }
+
+    if(ans.size()==0)
+
+    return "0";
+
+    else 
+
+    return ans;
+
+}
