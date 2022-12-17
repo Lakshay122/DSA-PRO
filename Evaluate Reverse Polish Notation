@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+#include<string>
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<long long>st;
+        for(long long i=0; i<tokens.size(); i++){
+            
+
+                if( tokens[i] == "+"){
+
+                  long long second = st.top(); st.pop();
+                  long long first = st.top(); st.pop();
+                   st.push(first+second);
+                   
+                }
+                else if( tokens[i] == "-"){
+
+                  long long second = st.top(); st.pop();
+                  long long first = st.top(); st.pop();
+                   st.push(first-second);
+                   
+                }
+                 else if( tokens[i] == "/"){
+
+                  long long second = st.top(); st.pop();
+                  long long first = st.top(); st.pop();
+                   st.push(first/second);
+                   
+                }
+              else  if( tokens[i] == "*"){
+
+                  long long second = st.top(); st.pop();
+                  long long first = st.top(); st.pop();
+                   st.push((first*second));
+                   
+                }
+
+               else{
+                   string s =  tokens[i];
+                    long long longdata = stoi(s);
+        
+                   st.push( longdata);         
+               }
+            
+        }
+        return st.top();
+    }
+};
