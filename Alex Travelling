@@ -1,0 +1,55 @@
+int minimumCost(vector<vector<int>>& flights, int n, int k) {
+        // code here
+           map<int,vector<pair<int,int>>>mp;
+
+        for(int i =0;i<flights.size();i++){
+
+            int u = flights[i][0];
+
+            int v = flights[i][1];
+
+            int wt = flights[i][2];
+
+            mp[u].push_back({v,wt});
+
+        }
+        vector<int>shortestPath(n+1,INT_MAX);
+         priority_queue <pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>> > p;
+         
+         p.push({0,k});
+         shortestPath[k]=0;
+         while(!p.empty()){
+             int dist = p.top().first;
+             int adjNode = p.top().second;
+             
+             p.pop();
+             
+             for(auto it: mp[adjNode]){
+                    if(shortestPath[it.first]>dist+it.second){
+
+                    shortestPath[it.first]=dist+it.second;
+
+                    p.push({shortestPath[it.first],it.first});
+
+                }
+             }
+         }
+        int ans = -1;
+           for(int i=1;i<shortestPath.size();i++){
+
+            if(shortestPath[i]==INT_MAX){
+
+                return -1;
+
+            }else{
+
+                ans=max(ans,shortestPath[i]);
+
+            }
+
+        }
+
+        return ans;
+      
+        
+    }
