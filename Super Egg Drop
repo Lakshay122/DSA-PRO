@@ -1,0 +1,32 @@
+  int dp(int k ,int n,vector<vector<int>> &dpi){
+      if(k==1) return n;
+      if(n==0 || n==1) return n;
+      if(dpi[n][k]!=-1) return dpi[n][k];
+  int mini = INT_MAX;
+  int left  = 1;
+  int right = n;
+  while(left<=right){
+      int mid = left +(right-left)/2;
+       
+       int low = dp(k-1,mid-1,dpi);
+       int high = dp(k,n-mid,dpi);
+
+       int temp = 1+ max(low,high);
+
+       mini = min(mini,temp);
+       if(low<high) left = mid+1;
+       else right = mid-1;
+
+       
+  }
+    //   for(int i=1; i<=n; i++){
+    //       mini = min(mini,1+max(dp(k,n-i,dpi),dp(k-1,i-1,dpi)));
+    //   }
+      dpi[n][k]=mini;
+      return mini;
+  }
+    int superEggDrop(int k, int n) {
+        // int nk = n;
+        vector<vector<int>> dpi( n+1 , vector<int> (k+1, -1)); 
+        return dp(k,n,dpi);
+    }
