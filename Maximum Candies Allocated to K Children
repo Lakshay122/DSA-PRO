@@ -1,0 +1,29 @@
+class Solution {
+public:
+long long child(int candie, vector<int>& candies){
+    long long cnt = 0;
+    for(int i=0; i<candies.size();i++) {
+
+      candie > 0?cnt = cnt + (candies[i]/candie): cnt += candies[i];
+    }
+    // cout<<cnt<<endl;
+    return cnt;
+}
+  
+    int maximumCandies(vector<int>& candies, long long k) {
+        long long mx_ele = 0;
+        int n = candies.size();
+        for(int i=0;i<n;i++) if(candies[i]>mx_ele) mx_ele = candies[i];
+      int st = 1;
+       int res = 0;
+        while(st <= mx_ele) {
+            int candie = st + (mx_ele - st)/2;
+            if(k <= child(candie,candies)){
+                  res = candie;
+                  st  = candie + 1;
+            }
+            else mx_ele = candie-1;
+        }
+        return res;
+    }
+};
