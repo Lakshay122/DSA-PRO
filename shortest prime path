@@ -1,0 +1,76 @@
+//{ Driver Code Starts
+//Initial Template for C++
+#include<bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+//User function Template for C++
+class Solution{   
+  public:
+    
+    void fillPrime(vector<int>&prime){
+        
+    for(int i=2;i*i<10000; i++ ){
+        if(prime[i]==1){
+            
+        for(int j=i*i; j<10000;j+=i){
+            prime[j] = 0;
+        }
+        }
+    }
+    }
+    int shortestPath(int Num1,int Num2)
+    {  
+        if(Num1 == Num2) return 0;
+    vector<int>prime(10000,1);
+        
+        fillPrime(prime);
+        
+        queue<int> q;
+        
+        vector<int> vis(10000,-1);
+        
+        q.push(Num1); vis[Num1] = 0;
+        
+        while(!q.empty()){
+            int top = q.front(); q.pop();
+            
+            string temp = to_string(top);
+            
+            for(int i=0;i<4 ;i++){
+                string temp2 = temp;
+                int s = i==0?1 : 0;
+                
+                for(int j=s;j<=9 ; j++) {
+                    temp2[i] = '0' + j;
+                    
+                    if(prime[stoi(temp2)] && vis[stoi(temp2)] == -1){
+                        cout<<temp2<<endl;
+                        vis[stoi(temp2)] = 1 + vis[top];
+                        q.push(stoi(temp2));
+                    }
+                }
+            }
+        }
+        
+        return vis[Num2];
+        // Complete this function using prime vector
+    }
+};
+
+
+//{ Driver Code Starts.
+signed main()
+{
+    int t;
+    cin>>t;
+    Solution obj;
+    while(t--)
+    {
+        int Num1,Num2;
+        cin>>Num1>>Num2;
+        int answer=obj.shortestPath(Num1,Num2);
+        cout<<answer<<endl;
+    }
+}
+// } Driver Code Ends
