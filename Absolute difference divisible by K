@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    long long countPairs(int n, int arr[], int k) {
+        // code here
+        
+        for(int i=0;i<n;i++){
+            arr[i] = (arr[i]+k)%k;
+        }
+        unordered_map<int,long long>m;
+        
+        for(int i=0;i<n;i++) m[arr[i]]++;
+        
+        long long cnt = 0;
+        
+        for(auto it:m){
+            // cout<<it.secodn
+            cnt+=((it.second*(it.second-1))/2);
+        }
+        return cnt;
+    }
+};
